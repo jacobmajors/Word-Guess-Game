@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>The Psychic Game</title>
+</head>
+<body>
+    <h1>The Psychic Game</h1>
+    <p>Guess what letter I'm thinking of</p>
+    <div id="psychic">
+            <p>Wins:</p>
+            <p>Losses:</p>
+            <p>Guesses left:</p>
+            <p>Guesses so far:</p>
+    </div>
+
+<script type="text/javascript">
+
+// User starts out with 9 guesses remaining.
+
+// User chooses a letter on keyboard.
+
+// Computer chooses a random value on keyboard.
+
+// We determine if the user wins or not.
+
+//    * If user picks the same letter as computer, then user wins.
+
+// We then add to their score.
+
+// The user then presses a letter on keyboard to play again.
+
+// Each time user wins or loses, guesses remaining decreases by 1.
+
+var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",];
+
+var wins = 0;
+var losses = 0;
+var guessesLeft = 9;
+var guessesSoFar = [];
+
+// This function is run whenever the user presses a key.
+document.onkeyup = function(event) {
+
+// Determines which key was pressed.
+var userGuess = event.key;
+
+// Randomly chooses a choice from the options array. This is the Computer's guess.
+var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+var keys = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",];
+		 	
+if (keys.indexOf(userGuess) > -1) {
+ 
+if (userGuess === computerGuess) {
+wins++;
+guessesLeft = 9;
+guessesSoFar = [];
+}
+ 
+if (userGuess != computerGuess) {
+guessesLeft --;
+guessesSoFar.push(userGuess);
+}
+ 
+if (guessesLeft === 0) {
+guessesLeft = 9;
+losses ++;
+guessesSoFar = [];
+}
+
+// Display the user and computer guesses, and wins/losses/guesses left/guesses so far.
+var html = 
+
+"<p>Wins: " + wins + "</p>" +
+"<p>Losses: " + losses + "</p>" +
+"<p>Guesses left: " + guessesLeft + "</p>" +
+"<p>Your Guesses so far: " + guessesSoFar.join(", ") + "</p>";
+
+document.querySelector("#psychic").innerHTML = html;
+}
+};
+</script>
+</body>
+</html>
